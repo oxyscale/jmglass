@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JM Glass Solutions - Proposal | OxyScale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Satoshi:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-black: #09090b;
+    --bg-surface: #18181b;
+    --bg-surface-2: #1f1f23;
+    --emerald: #34d399;
+    --emerald-dim: rgba(52, 211, 153, 0.15);
+    --emerald-border: rgba(52, 211, 153, 0.2);
+    --emerald-glow: rgba(52, 211, 153, 0.06);
+    --text-primary: #fafafa;
+    --text-muted: #a1a1aa;
+    --text-dim: #52525b;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(255, 255, 255, 0.1);
+    --red-soft: #f87171;
+    --red-dim: rgba(248, 113, 113, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Satoshi', -apple-system, sans-serif;
+    background: var(--bg-black);
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(9, 9, 11, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.03em;
+  }
+  .nav-logo .oxy { color: var(--text-primary); }
+  .nav-logo .scale { color: var(--emerald); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+
+  /* ===== SECTIONS ===== */
+  section {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+  .hero-prepared {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--emerald);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(40px, 6vw, 60px);
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--emerald);
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .hero-meta span { font-weight: 400; }
+  .hero-meta strong { color: var(--text-muted); font-weight: 500; }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 0;
+  }
+
+  /* ===== PROBLEM ===== */
+  .problem-section { padding-top: 100px; padding-bottom: 100px; }
+  .section-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--emerald);
+    margin-bottom: 20px;
+  }
+  .section-heading {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .problem-card {
+    padding: 28px;
+    border-radius: 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+  }
+  .problem-card.red {
+    background: var(--red-dim);
+    border-color: rgba(248, 113, 113, 0.15);
+  }
+  .problem-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+  .problem-card.red .problem-number { color: var(--red-soft); }
+  .problem-unit {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .problem-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ===== COMPARISON ===== */
+  .comparison-section { padding-top: 100px; padding-bottom: 100px; }
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .compare-card {
+    padding: 36px 32px;
+    border-radius: 16px;
+  }
+  .compare-card.old {
+    background: var(--red-dim);
+    border: 1px solid rgba(248, 113, 113, 0.12);
+  }
+  .compare-card.new {
+    background: var(--emerald-dim);
+    border: 1px solid var(--emerald-border);
+  }
+  .compare-tag {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .old .compare-tag { color: var(--red-soft); }
+  .new .compare-tag { color: var(--emerald); }
+  .compare-card h3 {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .compare-list { list-style: none; }
+  .compare-list li {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-muted);
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .old .compare-list li::before {
+    content: "\2715";
+    position: absolute;
+    left: 0;
+    color: var(--red-soft);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .new .compare-list li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    color: var(--emerald);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* ===== WHAT WE BUILD ===== */
+  .build-section { padding-top: 100px; padding-bottom: 60px; }
+  .build-steps { display: flex; flex-direction: column; gap: 6px; }
+  .build-step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    padding: 28px 32px;
+    border-radius: 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .build-step:hover { border-color: var(--emerald-border); }
+  .build-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--bg-surface-2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--emerald);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+  }
+  .build-step-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .build-step-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ===== PRICING ===== */
+  .pricing-section { padding-top: 100px; padding-bottom: 100px; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 48px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .price-card {
+    padding: 36px 28px;
+    border-radius: 18px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+  }
+  .price-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+  .price-card.recommended {
+    background: var(--emerald-dim);
+    border-color: var(--emerald-border);
+  }
+  .price-card.recommended:hover {
+    border-color: var(--emerald);
+  }
+  .recommended-badge {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--emerald);
+    color: var(--bg-black);
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 0 0 8px 8px;
+  }
+  .price-tier {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .recommended .price-tier { color: var(--emerald); }
+  .price-name {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .price-amount {
+    font-family: 'Outfit', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-setup {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .price-monthly {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .price-monthly strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .recommended .price-monthly { border-color: var(--emerald-border); }
+  .price-features { list-style: none; flex: 1; }
+  .price-features li {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+    padding: 6px 0 6px 22px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .price-features li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    color: var(--emerald);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .price-features li.dim {
+    color: var(--text-dim);
+  }
+  .price-features li.dim::before {
+    content: "\2014";
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  /* ===== SAVINGS CALLOUT ===== */
+  .savings-callout {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 40px 44px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .savings-left h3 {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .savings-left p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .savings-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .savings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-radius: 10px;
+  }
+  .savings-row.admin {
+    background: var(--red-dim);
+    border: 1px solid rgba(248, 113, 113, 0.1);
+  }
+  .savings-row.system {
+    background: var(--emerald-dim);
+    border: 1px solid var(--emerald-border);
+  }
+  .savings-row-label {
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .admin .savings-row-label { color: var(--red-soft); }
+  .system .savings-row-label { color: var(--emerald); }
+  .savings-row-amount {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .admin .savings-row-amount { color: var(--red-soft); }
+  .system .savings-row-amount { color: var(--emerald); }
+  .savings-row.savings {
+    background: var(--bg-surface-2);
+    border: 1px solid var(--border);
+  }
+  .savings .savings-row-label { color: var(--text-muted); font-weight: 500; }
+  .savings .savings-row-amount { color: var(--text-primary); }
+
+  /* ===== HOW IT WORKS ===== */
+  .works-section { padding-top: 100px; padding-bottom: 100px; }
+  .works-timeline {
+    position: relative;
+    padding-left: 36px;
+  }
+  .works-timeline::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+  .works-item {
+    position: relative;
+    padding-bottom: 36px;
+  }
+  .works-item:last-child { padding-bottom: 0; }
+  .works-dot {
+    position: absolute;
+    left: -36px;
+    top: 6px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--bg-black);
+    border: 2px solid var(--emerald-border);
+  }
+  .works-dot-inner {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--emerald);
+    margin: 2px auto;
+  }
+  .works-week {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--emerald);
+    margin-bottom: 6px;
+  }
+  .works-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .works-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    padding-top: 80px;
+    padding-bottom: 120px;
+    text-align: center;
+  }
+  .cta-box {
+    background: var(--emerald-dim);
+    border: 1px solid var(--emerald-border);
+    border-radius: 20px;
+    padding: 60px 48px;
+  }
+  .cta-box h2 {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+  .cta-box p {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+  .cta-contact {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .cta-contact a {
+    color: var(--emerald);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .cta-contact a:hover { text-decoration: underline; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 32px 28px 48px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-logo {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .footer-logo .oxy { color: var(--text-primary); }
+  .footer-logo .scale { color: var(--emerald); }
+  .footer-note { font-size: 12px; color: var(--text-dim); font-weight: 300; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .problem-grid, .comparison-grid, .pricing-grid, .savings-callout { grid-template-columns: 1fr; }
+    .branch-container { grid-template-columns: 1fr; }
+    .build-step { grid-template-columns: 1fr; }
+    .build-icon { margin-bottom: 8px; }
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    section { padding: 0 20px; }
+    .savings-callout { padding: 28px; gap: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="nav-logo"><span class="oxy">Oxy</span><span class="scale">Scale</span></div>
+  <div class="nav-links">
+    <a href="#problem">The Problem</a>
+    <a href="#solution">The Solution</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-prepared">Prepared for JM Glass Solutions</div>
+  <h1>Quote faster.<br>Grow <em>easier.</em></h1>
+  <p class="hero-sub">A quoting system built around how your glass business actually works. Less time on price lists, more time on site.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== THE PROBLEM ===== -->
+<section class="problem-section" id="problem">
+  <div class="section-label">The Problem</div>
+  <div class="section-heading">Where the time goes</div>
+  <div class="section-sub">Quoting is one of those things that just eats hours. Here's what it looks like right now.</div>
+
+  <div class="problem-grid">
+    <div class="problem-card red">
+      <div class="problem-number">Hours</div>
+      <div class="problem-unit">spent on every large quote</div>
+      <div class="problem-desc">Going through 10+ pages of price lists, calculating square metres, polishing, cutout holes, hardware quantities. All written out as a long math equation, then added up manually.</div>
+    </div>
+    <div class="problem-card red">
+      <div class="problem-number">$66,000+</div>
+      <div class="problem-unit">for an admin hire</div>
+      <div class="problem-desc">Annual cost of bringing someone on to help with quoting. Salary, super, training. And they'd still need a system to work from.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-number">1,848</div>
+      <div class="problem-unit">items in the price list</div>
+      <div class="problem-desc">17 product categories across glass types, hardware, processing, showers, balustrades, splashbacks, labour, and consumables. All living in spreadsheets and in your head.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-number">0</div>
+      <div class="problem-unit">documented systems</div>
+      <div class="problem-desc">No quoting process, no pricing calculator, no structured system. Hard to bring someone in to help when there's nothing to hand them.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BEFORE / AFTER ===== -->
+<section class="comparison-section" id="solution">
+  <div class="section-label">The Shift</div>
+  <div class="section-heading">Two ways to solve it</div>
+  <div class="section-sub">You could hire someone, or you could build a system. Here's how they compare.</div>
+
+  <div class="comparison-grid">
+    <div class="compare-card old">
+      <div class="compare-tag">Hiring an admin</div>
+      <h3>$66,000+ per year</h3>
+      <ul class="compare-list">
+        <li>$5,000 - $6,000/month salary plus super</li>
+        <li>Takes time to train up</li>
+        <li>Still needs a system to work from</li>
+        <li>Sick days, leave, turnover</li>
+        <li>Pricing knowledge still lives in your head</li>
+        <li>Invoicing still manual</li>
+        <li>No automated follow-ups or reminders</li>
+        <li>Need to hire again to scale further</li>
+      </ul>
+    </div>
+    <div class="compare-card new">
+      <div class="compare-tag">Building a system</div>
+      <h3>$10,000 + $250/mo</h3>
+      <ul class="compare-list">
+        <li>Quote any job in minutes</li>
+        <li>Anyone can use it, no glass knowledge needed</li>
+        <li>All 1,848 items priced and searchable</li>
+        <li>Branded PDF generated and emailed instantly</li>
+        <li>Invoices created automatically on acceptance</li>
+        <li>Follow-ups, reminders, and reviews handled</li>
+        <li>Always available, no training needed</li>
+        <li>Grows with your business</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing-section" id="pricing">
+  <div class="section-label">Pricing</div>
+  <div class="section-heading">Two options</div>
+  <div class="section-sub">Both include the full quoting engine and Xero invoicing. Tier 2 adds email automation, ServiceMate integration, and review requests.</div>
+
+  <div class="pricing-grid">
+
+    <!-- TIER 1 -->
+    <div class="price-card">
+      <div class="price-tier">Tier 1</div>
+      <div class="price-name">Quoting + Invoicing</div>
+      <div class="price-amount">$8,000<span style="font-size:16px;font-weight:400;color:var(--text-dim);"> + GST</span></div>
+      <div class="price-setup">one-time build fee</div>
+      <div class="price-monthly">then <strong>$300</strong> + GST / 4 weeks</div>
+      <ul class="price-features">
+        <li>Web-based quoting application</li>
+        <li>Full pricing database (1,848 items)</li>
+        <li>Dynamic form with job-type filtering</li>
+        <li>Pre-configured packages (showers, panels)</li>
+        <li>Multi-section quote support</li>
+        <li>Live price calculation</li>
+        <li>Branded PDF generation</li>
+        <li>Direct email delivery to customer</li>
+        <li>Quote history and tracking</li>
+        <li>Xero integration (auto-create invoices)</li>
+        <li>60% deposit invoice on quote acceptance</li>
+        <li>Balance invoice on job completion</li>
+        <li>Customer contact auto-synced to Xero</li>
+        <li>Hosting, support, and maintenance</li>
+        <li class="dim">Email follow-up sequences</li>
+        <li class="dim">Invoice and deposit reminders</li>
+        <li class="dim">ServiceMate integration</li>
+        <li class="dim">Google Review automation</li>
+      </ul>
+    </div>
+
+    <!-- TIER 2 -->
+    <div class="price-card recommended">
+      <div class="price-tier">Tier 2</div>
+      <div class="price-name">Full Automation</div>
+      <div class="price-amount">$10,000<span style="font-size:16px;font-weight:400;color:var(--text-dim);"> + GST</span></div>
+      <div class="price-setup">one-time build fee</div>
+      <div class="price-monthly">then <strong>$300</strong> + GST / 4 weeks</div>
+      <ul class="price-features">
+        <li>Everything in Tier 1</li>
+        <li>Quote follow-up email sequences</li>
+        <li>7-day, 14-day, and 30-day follow-ups</li>
+        <li>Automatic deposit payment reminders</li>
+        <li>Invoice payment reminders</li>
+        <li>Appointment reminder emails</li>
+        <li>ServiceMate integration</li>
+        <li>Auto-create jobs on quote acceptance</li>
+        <li>Customer sync to ServiceMate CRM</li>
+        <li>Quote PDF attached to job records</li>
+        <li>Job status sync (complete triggers balance invoice)</li>
+        <li>Google Review request automation</li>
+        <li>Post-job review email sequence</li>
+        <li>Hosting, support, and maintenance</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- DASHBOARD ADD-ON -->
+  <div style="max-width:720px;margin:0 auto 48px;">
+    <div class="price-card" style="border:1px solid var(--emerald-border);background:var(--bg-surface);">
+      <div class="price-tier" style="color:var(--emerald);">Optional Add-on</div>
+      <div class="price-name">Business Intelligence Dashboard</div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
+        <div class="price-amount">$5,000<span style="font-size:16px;font-weight:400;color:var(--text-dim);"> + GST</span></div>
+      </div>
+      <div class="price-setup">one-time build fee, no additional monthly</div>
+      <div class="price-monthly" style="border-bottom:1px solid var(--emerald-border);">Available with either tier. Included in your existing retainer.</div>
+      <p style="font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.7;margin-bottom:24px;">Every quote and invoice is already flowing through the system. The dashboard just surfaces the numbers that matter - conversion rates, revenue pipeline, which job types are making you the most money. No extra work from you, it's all data that's already there.</p>
+      <ul class="price-features">
+        <li>Quote conversion rate (sent vs accepted vs declined)</li>
+        <li>Revenue pipeline (total value of outstanding quotes)</li>
+        <li>Monthly and quarterly revenue tracking</li>
+        <li>Average quote value by job type</li>
+        <li>Quote volume breakdown (showers vs fences vs balustrades)</li>
+        <li>Outstanding invoices and deposit collection rate</li>
+        <li>Quote ageing (which quotes need chasing)</li>
+        <li>Monthly trend lines and seasonal patterns</li>
+        <li>Job type profitability comparison</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- RETAINER EXPLAINER -->
+  <div style="max-width:720px;margin:0 auto 48px;">
+    <div style="padding:32px 36px;border-radius:16px;background:var(--bg-surface);border:1px solid var(--border);">
+      <div class="section-label" style="margin-bottom:16px;">What the monthly retainer covers</div>
+      <p style="font-size:15px;color:var(--text-muted);font-weight:300;line-height:1.8;margin-bottom:24px;">Your monthly retainer isn't just hosting. It's having a technical team on call that knows your system inside and out.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="padding:16px 20px;border-radius:10px;background:var(--bg-surface-2);border:1px solid var(--border);">
+          <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:6px;">Hosting & Uptime</div>
+          <div style="font-size:13px;color:var(--text-muted);font-weight:300;line-height:1.5;">Your system live 24/7. Reliable infrastructure, SSL, backups, and monitoring so it's always there when you need it.</div>
+        </div>
+        <div style="padding:16px 20px;border-radius:10px;background:var(--bg-surface-2);border:1px solid var(--border);">
+          <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:6px;">General Maintenance</div>
+          <div style="font-size:13px;color:var(--text-muted);font-weight:300;line-height:1.5;">Bug fixes, security patches, software updates, and keeping all integrations (Xero, ServiceMate) running smoothly as platforms update.</div>
+        </div>
+        <div style="padding:16px 20px;border-radius:10px;background:var(--bg-surface-2);border:1px solid var(--border);">
+          <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:6px;">Minor Edits & Tweaks</div>
+          <div style="font-size:13px;color:var(--text-muted);font-weight:300;line-height:1.5;">Need to add a new glass type? Update a price? Adjust an email template? Small changes are covered. No extra charge, no tickets, just message us.</div>
+        </div>
+        <div style="padding:16px 20px;border-radius:10px;background:var(--bg-surface-2);border:1px solid var(--border);">
+          <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:6px;">Priority Support</div>
+          <div style="font-size:13px;color:var(--text-muted);font-weight:300;line-height:1.5;">Something's not working right? You've got a direct line to the team that built it. No call centres, no support queues. Fast, human responses.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERMS -->
+  <div style="max-width:720px;margin:0 auto 48px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div style="padding:24px 28px;border-radius:14px;background:var(--bg-surface);border:1px solid var(--border);">
+        <div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--emerald);margin-bottom:12px;">Payment Terms</div>
+        <div style="font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.8;">50% upon engagement<br>50% upon delivery</div>
+      </div>
+      <div style="padding:24px 28px;border-radius:14px;background:var(--bg-surface);border:1px solid var(--border);">
+        <div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--emerald);margin-bottom:12px;">Expected Delivery</div>
+        <div style="font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.8;">3 - 4 weeks from kickoff</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVINGS CALLOUT -->
+  <div class="savings-callout">
+    <div class="savings-left">
+      <h3>How it compares to an admin hire</h3>
+      <p>If you're thinking about bringing someone on to help with quoting later this year, here's how the numbers stack up. The system handles a lot of what that person would do.</p>
+    </div>
+    <div class="savings-right">
+      <div class="savings-row admin">
+        <span class="savings-row-label">Admin hire (year one)</span>
+        <span class="savings-row-amount">$66,000+</span>
+      </div>
+      <div class="savings-row system">
+        <span class="savings-row-label">Full Automation (year one)</span>
+        <span class="savings-row-amount">$13,000</span>
+      </div>
+      <div class="savings-row savings">
+        <span class="savings-row-label">You keep in your pocket</span>
+        <span class="savings-row-amount">$53,000+</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2>Any questions? Get in touch.</h2>
+    <p>We're happy to walk through any of this in more detail. Reach out anytime.</p>
+    <div class="cta-contact">
+      <a href="mailto:jordan@oxyscale.ai">jordan@oxyscale.ai</a>
+      <a href="mailto:george@oxyscale.ai">george@oxyscale.ai</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-logo"><span class="oxy">Oxy</span><span class="scale">Scale</span></div>
+  <div class="footer-note">Prepared for JM Glass Solutions | April 2026</div>
+</footer>
+
+</body>
+</html>
